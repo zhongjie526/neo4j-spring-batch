@@ -18,6 +18,20 @@ docker run --publish=7474:7474 --publish=7687:7687 --volume=$HOME/neo4j/data:/da
 
 https://gist.github.com/maruthiprithivi/f11bf40b558879aca0c30ce76e7dec98[Banking - Customer & Transaction Data]
 
+=== Configuration 
+
+```
+spring.neo4j.uri=bolt://localhost:7687
+spring.neo4j.authentication.username=neo4j
+spring.neo4j.authentication.password=*************
+
+spring.mvc.format.date-time=yyyy-MM-dd HH:mm:ss
+
+customerFile=data/customers.csv
+transferFile=data/transfers.csv
+purchaseFile=data/purchases.csv
+```
+
 === Compile and package
 
 ```
@@ -26,5 +40,19 @@ mvn clean package
 
 === Run the application
 
-==== Ingest the CSV
+==== Step 1. Ingest the CSV
+
+```
+java -jar -Dspring.profiles.active=ingest target/neo4j-interview-exercise-0.0.1.jar
+```
+
+=== Step 2. Build Relationship(Edge)
+
+```
+java -jar -Dspring.profiles.active=build target/neo4j-interview-exercise-0.0.1.jar
+```
+
+=== Query the graph 
+
+Open browser at http://localhost:7474/browser/
 
