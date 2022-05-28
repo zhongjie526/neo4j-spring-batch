@@ -4,7 +4,7 @@
 :project_id: neo4j excercise
 
 
-= Neo4j Interview Exercise
+= Using Spring Boot + Spring Batch to ingest CSVs into Neo4j DB and build graph nodes + edges. 
 
 == Instructions
 
