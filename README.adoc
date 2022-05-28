@@ -6,13 +6,9 @@
 
 == Neo4j Interview Exercise
 
-You will use Neo4j's https://wikipedia.org/wiki/NoSQL[NoSQL] graph-based data store to
-build an embedded Neo4j server, store entities and relationships, and develop queries.
+=== Instructions
 
-== What You Need
-
-:java_version: 1.8
-include::https://raw.githubusercontent.com/spring-guides/getting-started-macros/main/prereq_editor_jdk_buildtools.adoc[]
+Set up Neo4j Enterprise (Docker / VM). 
 
 include::https://raw.githubusercontent.com/spring-guides/getting-started-macros/main/how_to_complete_this_guide.adoc[]
 
