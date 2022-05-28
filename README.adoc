@@ -8,12 +8,15 @@
 
 === Instructions
 
-Set up Neo4j Enterprise (Docker / VM). 
+Set up Neo4j (Docker / VM). 
 
-include::https://raw.githubusercontent.com/spring-guides/getting-started-macros/main/how_to_complete_this_guide.adoc[]
+```
+docker run --publish=7474:7474 --publish=7687:7687 --volume=$HOME/neo4j/data:/data -e dbms.memory.heap.initial_size=1024m -e dbms.memory.heap.max_size=2048m  neo4j
+```
 
-[[scratch]]
-== Starting with Spring Initializr
+== Compile and package
+
+
 
 
 To manually initialize the project:
