@@ -4,7 +4,7 @@
 :project_id: neo4j excercise
 
 
-== Using Spring Boot/Spring Batch/Spring Data Neo4j to ingest CSVs into Neo4j DB and build graph nodes + edges. 
+== Using Spring Boot/Spring Batch/Spring Data Neo4j to convert CSVs into Nodes and Edges in Neo4j.
 
 == Instructions
 
