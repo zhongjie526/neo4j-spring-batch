@@ -41,7 +41,7 @@ public class GraphService {
                 String receiverAccountNumber = transfer.getReceiverAccountNumber();
                 if (receiverAccountNumber != null && customerAccountNumberMap.containsKey(receiverAccountNumber)) {
                     Customer customerTransferredTo = customerAccountNumberMap.get(receiverAccountNumber);
-                    log.info(i+" : "+customer.getFirstName()+" transferred to "+customerTransferredTo.getFirstName());
+//                    log.info(i+" : "+customer.getFirstName()+" transferred to "+customerTransferredTo.getFirstName());
                     customer.getCustomerTransferredTo().add(customerTransferredTo);
                 }
             }
@@ -62,7 +62,7 @@ public class GraphService {
             String cardNumber = purchase.getCardNumber();
             if(cardNumber !=null && customerCardNumberMap.containsKey(cardNumber)){
                 Customer customer = customerCardNumberMap.get(cardNumber);
-                log.info(i+" : "+customer.getFirstName() + " made a purchase with amount: " + purchase.getAmount());
+//                log.info(i+" : "+customer.getFirstName() + " made a purchase with amount: " + purchase.getAmount());
                 customer.getPurchasesMade().add(purchase);
             }
             i.getAndIncrement();
