@@ -4,7 +4,7 @@
 :project_id: neo4j excercise
 
 
-= Using Spring Boot/Spring Batch to ingest CSVs into Neo4j DB and build graph nodes + edges. 
+= Using Spring Boot/Spring Batch/Spring Data Neo4j to ingest CSVs into Neo4j DB and build graph nodes + edges. 
 
 == Instructions
 
@@ -57,7 +57,7 @@ In step 2, we are building the graph edges(relationships) by re-iterating throug
 java -jar -Dspring.profiles.active=build target/neo4j-interview-exercise-0.0.1.jar
 ```
 
-Throughout the exercise, we've managed to create the nodes and edges using entirely Spring Boot + Spring Batch + POJOs without a single line of cipher. 
+Throughout the exercise, we've managed to create the nodes and edges using entirely Spring Boot + Spring Batch + Spring Data Neo4j + POJOs without a single line of cipher. 
 
 === Query the graph 
 
