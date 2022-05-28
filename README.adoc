@@ -46,7 +46,7 @@ mvn clean package
 java -jar -Dspring.profiles.active=ingest target/neo4j-interview-exercise-0.0.1.jar
 ```
 
-=== Step 2. Build Relationship(Edge)
+==== Step 2. Build Relationship(Edge)
 
 ```
 java -jar -Dspring.profiles.active=build target/neo4j-interview-exercise-0.0.1.jar
