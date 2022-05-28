@@ -1,0 +1,33 @@
+:toc:
+:icons: font
+:source-highlighter: prettify
+:project_id: neo4j excercise
+
+
+== Neo4j Interview Exercise
+
+You will use Neo4j's https://wikipedia.org/wiki/NoSQL[NoSQL] graph-based data store to
+build an embedded Neo4j server, store entities and relationships, and develop queries.
+
+== What You Need
+
+:java_version: 1.8
+include::https://raw.githubusercontent.com/spring-guides/getting-started-macros/main/prereq_editor_jdk_buildtools.adoc[]
+
+include::https://raw.githubusercontent.com/spring-guides/getting-started-macros/main/how_to_complete_this_guide.adoc[]
+
+[[scratch]]
+== Starting with Spring Initializr
+
+
+To manually initialize the project:
+
+. Navigate to https://start.spring.io.
+This service pulls in all the dependencies you need for an application and does most of the setup for you.
+. Choose either Gradle or Maven and the language you want to use. This guide assumes that you chose Java.
+. Click *Dependencies* and select *Spring Data Neo4j*.
+. Click *Generate*.
+. Download the resulting ZIP file, which is an archive of a web application that is configured with your choices.
+
+NOTE: If your IDE has the Spring Initializr integration, you can complete this process from your IDE.
+
