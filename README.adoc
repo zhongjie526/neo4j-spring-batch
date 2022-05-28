@@ -19,7 +19,7 @@ docker run --publish=7474:7474 --publish=7687:7687 --volume=$HOME/neo4j/data:/da
 Orignal Data:
 https://gist.github.com/maruthiprithivi/f11bf40b558879aca0c30ce76e7dec98[Banking - Customer & Transaction Data]
 
-Please note, if you wishe to follow the exercise, please use the data in this repo as is (src/main/resource/data). Some minor modifications were done on the original data due to duplicate primary keys. 
+Please note, if you wish to follow the exercise, please use the data in this repo as is (src/main/resource/data). Some minor modifications were done on the original data due to duplicate primary keys. 
 
 === Configuration (.properties file)
 
