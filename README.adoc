@@ -20,7 +20,9 @@ https://gist.github.com/maruthiprithivi/f11bf40b558879aca0c30ce76e7dec98[Banking
 
 === Compile and package
 
-```mvn clean package```
+```
+mvn clean package
+```
 
 === Run the application
 
