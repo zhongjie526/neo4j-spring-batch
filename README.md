@@ -15,6 +15,10 @@ https://gist.github.com/maruthiprithivi/f11bf40b558879aca0c30ce76e7dec98[Banking
 
 Please note, if you wish to follow the exercise, please use the data in this repo as is (src/main/resource/data). Some minor modifications were done on the original data due to duplicate primary keys. 
 
+### Data Model
+
+![image](./photos/data_model.png)
+
 ### Configuration (.properties file)
 
 Change the uri, username and password for your own docker environment.
@@ -101,3 +105,11 @@ Open browser at http://localhost:7474/browser/
 #### Viewing the transfers (edges)
 
 ![image](./photos/neo4j_transfers.png)
+
+#### Getting the Sender with the most transfers
+
+![image](./photos/sender_with_most_transfers.png)
+
+#### Getting the Receiver with the most transfers
+
+![image](./photos/receiver_with_most_transfers.png)
