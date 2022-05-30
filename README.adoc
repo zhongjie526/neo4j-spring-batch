@@ -106,5 +106,4 @@ Open browser at http://localhost:7474/browser/
 
 ==== Viewing the transfers (edges)
 
-![Screenshot](/photos/neo4j_transfers.png)
-
+![image](/photos/neo4j_transfers.png)
