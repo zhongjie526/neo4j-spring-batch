@@ -104,3 +104,6 @@ Throughout the exercise, we've managed to create the nodes and edges using entir
 
 Open browser at http://localhost:7474/browser/
 
+==== Viewing the transfers (edges)
+![Alt text](photos/neo4j_transfers.png)
+
