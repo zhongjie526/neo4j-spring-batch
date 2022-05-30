@@ -96,7 +96,7 @@ Process finished with exit code 0
 
 ```
 
-Throughout the exercise, we've managed to create the nodes and edges using entirely Spring Boot + Spring Batch + Spring Data Neo4j + POJOs without a single line of cipher. 
+Throughout the exercise, we've managed to create the nodes and edges using entirely Spring Boot + Spring Batch + Spring Data Neo4j + POJOs without a single line of cypher. 
 
 ### Query the graph 
 
