@@ -1,6 +1,5 @@
 ## Using Spring Boot/Spring Batch/Spring Data Neo4j to convert CSVs into Nodes and Edges in Neo4j.
 
-## Instructions
 
 ### Set up Neo4j (Docker / VM). 
 
