@@ -8,9 +8,7 @@ import org.springframework.data.neo4j.core.schema.Node;
 import org.springframework.data.neo4j.core.schema.Property;
 import org.springframework.data.neo4j.core.schema.Relationship;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 
@@ -31,11 +29,13 @@ public class Customer {
 	@Property @Getter @Setter private String accountNumber;
 
 	@Getter @Setter
-	@Relationship(type="TRANSFERRED_TO",direction = Relationship.Direction.OUTGOING)
-	private Set<Customer> customerTransferredTo = new HashSet<>();
+	@Relationship(type="TRANSFER",direction = Relationship.Direction.OUTGOING)
+	private Set<TransferRel> transfersMade = new HashSet<>();
+
+
 
 	@Getter @Setter
-	@Relationship(type="MAKE_PURCHASE",direction = Relationship.Direction.OUTGOING)
+	@Relationship(type="PURCHASE",direction = Relationship.Direction.OUTGOING)
 	private Set<Purchase> purchasesMade = new HashSet<>();
 
 }

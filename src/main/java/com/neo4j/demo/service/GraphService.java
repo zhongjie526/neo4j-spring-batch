@@ -1,6 +1,7 @@
 package com.neo4j.demo.service;
 
 import com.neo4j.demo.model.Customer;
+import com.neo4j.demo.model.TransferRel;
 import com.neo4j.demo.repo.CustomerRepo;
 import com.neo4j.demo.repo.PurchaseRepo;
 import com.neo4j.demo.repo.TransferRepo;
@@ -42,7 +43,12 @@ public class GraphService {
                 if (receiverAccountNumber != null && customerAccountNumberMap.containsKey(receiverAccountNumber)) {
                     Customer customerTransferredTo = customerAccountNumberMap.get(receiverAccountNumber);
 //                    log.info(i+" : "+customer.getFirstName()+" transferred to "+customerTransferredTo.getFirstName());
-                    customer.getCustomerTransferredTo().add(customerTransferredTo);
+
+                    TransferRel transferRel = new TransferRel(transfer.getTransactionId(),customerTransferredTo);
+                    transferRel.setTransferDate(transfer.getTransferDatetime());
+                    transferRel.setTransferAmount(transfer.getAmount());
+                    customer.getTransfersMade().add(transferRel);
+
                 }
             }
             i.getAndIncrement();
