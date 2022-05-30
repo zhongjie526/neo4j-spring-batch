@@ -54,7 +54,7 @@ java -jar -Dspring.profiles.active=ingest target/neo4j-interview-exercise-0.0.1.
 
 ==== Step 2. Build Relationship(Edge)
 
-In step 2, we are building the graph edges(relationships) by re-iterating through the Customer,Transfer and Purchase nodes. Although, programatically, this is achievable through interacting with Neo4jRepository interface, the write performance is extremely low this way. It will take more than 24 hours for our sample dataset. Hence we are creating a custom ItemReader and utilizing the power of Spring Batch. The job was done in about 3 minutes! 
+In step 2, we are building the graph edges(relationships) by re-iterating through the Customer,Transfer and Purchase nodes. Although, programatically, this is achievable through interacting with Neo4jRepository interface, the write performance is extremely low this way, even for our sample dataset. Hence we are creating a custom ItemReader and utilizing the power of Spring Batch. The job was done in about 3 minutes! 
 
 ```
 java -jar -Dspring.profiles.active=build target/neo4j-interview-exercise-0.0.1.jar
