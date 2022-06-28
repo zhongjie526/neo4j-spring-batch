@@ -67,11 +67,11 @@ java -jar -Dspring.profiles.active=build target/neo4j-interview-exercise-0.0.1.j
 2022-05-30 10:58:14.587  INFO 57197 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Neo4j repositories in DEFAULT mode.
 2022-05-30 10:58:14.604  INFO 57197 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 15 ms. Found 3 Neo4j repository interfaces.
 2022-05-30 10:58:14.742  INFO 57197 --- [           main] org.neo4j.driver.internal.DriverFactory  : Direct driver instance 532297836 created for server address localhost:7687
-2022-05-30 10:58:14.850  INFO 57197 --- [           main] com.neo4j.demo.service.GraphService      : Adding Purchases to Customers
+2022-05-30 10:58:14.850  INFO 57197 --- [           main] com.neo4j.demo.service.GraphBuildService      : Adding Purchases to Customers
 2022-05-30 10:58:14.854  WARN 57197 --- [           main] o.s.b.c.c.a.DefaultBatchConfigurer       : No datasource was provided...using a Map based JobRepository
 2022-05-30 10:58:14.854  WARN 57197 --- [           main] o.s.b.c.c.a.DefaultBatchConfigurer       : No transaction manager was provided, using a ResourcelessTransactionManager
 2022-05-30 10:58:14.857  INFO 57197 --- [           main] o.s.b.c.l.support.SimpleJobLauncher      : No TaskExecutor has been set, defaulting to synchronous executor.
-2022-05-30 10:58:15.688  INFO 57197 --- [           main] com.neo4j.demo.service.GraphService      : Adding Transfers to Customers
+2022-05-30 10:58:15.688  INFO 57197 --- [           main] com.neo4j.demo.service.GraphBuildService      : Adding Transfers to Customers
 2022-05-30 10:58:15.758  WARN 57197 --- [           main] o.s.b.c.c.a.DefaultBatchConfigurer       : No datasource was provided...using a Map based JobRepository
 2022-05-30 10:58:15.758  WARN 57197 --- [           main] o.s.b.c.c.a.DefaultBatchConfigurer       : No transaction manager was provided, using a ResourcelessTransactionManager
 2022-05-30 10:58:15.759  INFO 57197 --- [           main] o.s.b.c.l.support.SimpleJobLauncher      : No TaskExecutor has been set, defaulting to synchronous executor.

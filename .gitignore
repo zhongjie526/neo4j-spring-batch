@@ -9,6 +9,7 @@ bin
 target
 build/
 .gradle
+node_modules/
 
 # Eclipse Project Files #
 

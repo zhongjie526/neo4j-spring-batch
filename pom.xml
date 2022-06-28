@@ -15,7 +15,39 @@
 	<description>neo4j interview exercise</description>
 	<properties>
 		<java.version>11</java.version>
+		<vaadin.version>23.1.2</vaadin.version>
 	</properties>
+
+
+	<pluginRepositories>
+		<!-- The order of definitions matters. Explicitly defining central here to make sure it has the highest priority. -->
+		<pluginRepository>
+			<id>central</id>
+			<url>https://repo.maven.apache.org/maven2</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</pluginRepository>
+		<pluginRepository>
+			<id>vaadin-prereleases</id>
+			<url>
+				https://maven.vaadin.com/vaadin-prereleases/
+			</url>
+		</pluginRepository>
+	</pluginRepositories>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.vaadin</groupId>
+				<artifactId>vaadin-bom</artifactId>
+				<version>${vaadin.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -24,7 +56,25 @@
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-batch</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.neo4j.gds</groupId>
+			<artifactId>core</artifactId>
+			<version>2.1.2</version>
+<!--			<scope>runtime</scope>-->
+		</dependency>
+
+		<dependency>
+			<groupId>io.projectreactor</groupId>
+			<artifactId>reactor-core</artifactId>
+			<version>3.4.18</version>
 		</dependency>
 
 
@@ -40,8 +90,23 @@
 			<scope>test</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>org.neo4j.gds</groupId>
+			<artifactId>core</artifactId>
+			<version>2.1.4</version>
+<!--			<scope>runtime</scope>-->
+		</dependency>
 
 
+		<dependency>
+			<groupId>com.vaadin</groupId>
+			<!-- Replace artifactId with vaadin-core to use only free components -->
+			<artifactId>vaadin</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.vaadin</groupId>
+			<artifactId>vaadin-spring-boot-starter</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -49,6 +114,18 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>com.vaadin</groupId>
+				<artifactId>vaadin-maven-plugin</artifactId>
+				<version>${vaadin.version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>prepare-frontend</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

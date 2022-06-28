@@ -1,7 +1,7 @@
 package com.neo4j.demo.config.batch.reader;
 
 import com.neo4j.demo.model.Customer;
-import com.neo4j.demo.service.GraphService;
+import com.neo4j.demo.service.GraphBuildService;
 import org.springframework.batch.item.ItemReader;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
@@ -14,15 +14,15 @@ public class CustomerReaderAddPurchase implements ItemReader<Customer> {
 
     private List<Customer> customers;
     private int nextCustomerIndex;
-    private final GraphService graphService;
+    private final GraphBuildService graphBuildService;
 
-    public CustomerReaderAddPurchase(GraphService graphService) {
-        this.graphService = graphService;
+    public CustomerReaderAddPurchase(GraphBuildService graphBuildService) {
+        this.graphBuildService = graphBuildService;
         initialize();
     }
 
     private void initialize(){
-        customers = graphService.addPurchaseToCustomer();
+        customers = graphBuildService.addPurchaseToCustomer();
         nextCustomerIndex=0;
     }
 

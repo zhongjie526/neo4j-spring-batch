@@ -38,4 +38,12 @@ public class Customer {
 	@Relationship(type="PURCHASE",direction = Relationship.Direction.OUTGOING)
 	private Set<Purchase> purchasesMade = new HashSet<>();
 
+	@Override
+	public String toString() {
+		return "Customer{" +
+				"CIF='" + CIF + '\'' +
+				", firstName='" + firstName + '\'' +
+				", lastName='" + lastName + '\'' +
+				'}';
+	}
 }

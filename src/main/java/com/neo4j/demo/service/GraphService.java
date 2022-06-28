@@ -1,82 +1,68 @@
 package com.neo4j.demo.service;
 
 import com.neo4j.demo.model.Customer;
-import com.neo4j.demo.model.TransferRel;
+import com.neo4j.demo.model.MovieEntity;
 import com.neo4j.demo.repo.CustomerRepo;
-import com.neo4j.demo.repo.PurchaseRepo;
-import com.neo4j.demo.repo.TransferRepo;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.Profile;
-import org.springframework.stereotype.Component;
+import org.apache.commons.lang3.StringUtils;
+import org.neo4j.driver.Driver;
 
-import java.util.*;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.function.Function;
-import java.util.stream.Collectors;
+import org.springframework.data.mapping.context.MappingContext;
+import org.springframework.data.neo4j.core.Neo4jTemplate;
+import org.springframework.data.neo4j.core.ReactiveNeo4jTemplate;
+import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
 
-@Profile("build")
+import java.util.List;
+import java.util.stream.Stream;
+
 @Slf4j
-@Component
+@Service
 public class GraphService {
 
+    private final Driver driver;
+    private final Neo4jTemplate template;
+    private final ReactiveNeo4jTemplate rxTemplate;
     private final CustomerRepo customerRepo;
-    private final TransferRepo transferRepo;
-    private final PurchaseRepo purchaseRepo;
+    private final MappingContext mappingContext;
 
-
-    public GraphService(CustomerRepo customerRepo, TransferRepo transferRepo, PurchaseRepo purchaseRepo) {
+    public GraphService(Driver driver, Neo4jTemplate template, ReactiveNeo4jTemplate rxTemplate, CustomerRepo customerRepo, MappingContext mappingContext) {
+        this.driver = driver;
+        this.template = template;
+        this.rxTemplate = rxTemplate;
         this.customerRepo = customerRepo;
-        this.transferRepo = transferRepo;
-        this.purchaseRepo = purchaseRepo;
+        this.mappingContext = mappingContext;
     }
 
-    public List<Customer> addTransferToCustomer(){
-        log.info("Adding Transfers to Customers");
-
-        Map<String,Customer> customerAccountNumberMap =  customerRepo.findAll().stream().collect(Collectors.toMap(Customer::getAccountNumber, Function.identity()));
-        AtomicInteger i = new AtomicInteger(1);
-        transferRepo.findAll().stream().forEach(transfer -> {
-            String senderAccountNumber =transfer.getSenderAccountNumber();
-            if (senderAccountNumber != null && customerAccountNumberMap.containsKey(senderAccountNumber)) {
-                Customer customer = customerAccountNumberMap.get(senderAccountNumber);
-                String receiverAccountNumber = transfer.getReceiverAccountNumber();
-                if (receiverAccountNumber != null && customerAccountNumberMap.containsKey(receiverAccountNumber)) {
-                    Customer customerTransferredTo = customerAccountNumberMap.get(receiverAccountNumber);
-//                    log.info(i+" : "+customer.getFirstName()+" transferred to "+customerTransferredTo.getFirstName());
-
-                    TransferRel transferRel = new TransferRel(transfer.getTransactionId(),customerTransferredTo);
-                    transferRel.setTransferDate(transfer.getTransferDatetime());
-                    transferRel.setTransferAmount(transfer.getAmount());
-                    customer.getTransfersMade().add(transferRel);
-
-                }
-            }
-            i.getAndIncrement();
-        });
-
-        return new ArrayList<>(customerAccountNumberMap.values());
+    public int getNodes(){
+        log.info("Getting count of all nodes");
+        return driver.session().run("MATCH(n) RETURN count(*) as nodes").single().get("nodes").asInt();
     }
 
-    public List<Customer> addPurchaseToCustomer(){
+    public int getNodes(String label) {
+        log.info(String.format("Getting count of all nodes where label=%s",label));
+        return driver.session().run(String.format("MATCH (:%s) RETURN count(*) as nodes",
+                StringUtils.capitalize(label))).single().get("nodes").asInt();
+    }
 
-        log.info("Adding Purchases to Customers");
-
-        Map<String,Customer> customerCardNumberMap =  customerRepo.findAll().stream().collect(Collectors.toMap(Customer::getCardNumber, Function.identity()));
-
-        AtomicInteger i = new AtomicInteger(1);
-        purchaseRepo.findAll().stream().forEach(purchase -> {
-            String cardNumber = purchase.getCardNumber();
-            if(cardNumber !=null && customerCardNumberMap.containsKey(cardNumber)){
-                Customer customer = customerCardNumberMap.get(cardNumber);
-//                log.info(i+" : "+customer.getFirstName() + " made a purchase with amount: " + purchase.getAmount());
-                customer.getPurchasesMade().add(purchase);
-            }
-            i.getAndIncrement();
-        });
-
-        return new ArrayList<>(customerCardNumberMap.values());
-
+    public void get(){
+        template.count(Customer.class);
     }
 
 
+    public Stream<String> titles() {
+
+        return template.findAll(MovieEntity.class).stream().map(movieEntity -> movieEntity.getTitle());
+    }
+
+    public Flux<MovieEntity> movies(){
+        return rxTemplate.findAll(MovieEntity.class);
+    }
+
+    public List<Customer[]> getTriangle() {
+        return customerRepo.findCustomerTriangles();
+    }
+    public List<Customer> getCustomer() {
+        return customerRepo.findCustomers();
+    }
 }
