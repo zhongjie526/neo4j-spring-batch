@@ -1,6 +1,5 @@
 ## Using Spring Boot/Spring Batch/Spring Data Neo4j to convert CSVs into Nodes and Edges in Neo4j.
 
-## Instructions
 
 ### Set up Neo4j (Docker / VM). 
 
@@ -10,10 +9,13 @@ docker run --publish=7474:7474 --publish=7687:7687 --volume=$HOME/neo4j/data:/da
 
 ### Data Access
 
-Orignal Data:
-https://gist.github.com/maruthiprithivi/f11bf40b558879aca0c30ce76e7dec98[Banking - Customer & Transaction Data]
+Orignal Data: [Banking - Customer & Transaction Data](https://gist.github.com/maruthiprithivi/f11bf40b558879aca0c30ce76e7dec98)
 
 Please note, if you wish to follow the exercise, please use the data in this repo as is (src/main/resource/data). Some minor modifications were done on the original data due to duplicate primary keys. 
+
+### Data Model
+
+![image](./photos/data_model.png)
 
 ### Configuration (.properties file)
 
@@ -92,7 +94,7 @@ Process finished with exit code 0
 
 ```
 
-Throughout the exercise, we've managed to create the nodes and edges using entirely Spring Boot + Spring Batch + Spring Data Neo4j + POJOs without a single line of cipher. 
+Throughout the exercise, we've managed to create the nodes and edges using entirely Spring Boot + Spring Batch + Spring Data Neo4j + POJOs without a single line of cypher. 
 
 ### Query the graph 
 
@@ -101,3 +103,11 @@ Open browser at http://localhost:7474/browser/
 #### Viewing the transfers (edges)
 
 ![image](./photos/neo4j_transfers.png)
+
+#### Getting the Sender with the most transfers
+
+![image](./photos/sender_with_most_transfers.png)
+
+#### Getting the Receiver with the most transfers
+
+![image](./photos/receiver_with_most_transfers.png)
