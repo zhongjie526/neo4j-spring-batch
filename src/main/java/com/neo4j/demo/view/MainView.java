@@ -18,11 +18,9 @@ public class MainView extends VerticalLayout {
     public MainView() {
 
 
-        Button ex2 = new Button("Example 2");
 
         RouterLink ex1 = new RouterLink("Example 1",Example1.class);
-
-
+        RouterLink ex2 = new RouterLink("Example 2",Example2.class);
 
         setMargin(true);
 

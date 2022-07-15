@@ -1,6 +1,7 @@
 package com.neo4j.demo.view;
 
 import com.neo4j.demo.model.Customer;
+import com.neo4j.demo.model.CustomerList;
 import com.neo4j.demo.service.GraphService;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.Text;
@@ -10,17 +11,22 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouterLink;
+import lombok.extern.slf4j.Slf4j;
+import org.javatuples.Triplet;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
-
+@Slf4j
 @PageTitle("Example1")
 @Route(value = "/example1")
 public class Example1 extends VerticalLayout {
 
 
     private  GraphService graphService;
-    Grid<Customer> grid = new Grid<>(Customer.class);
+
+    Grid<CustomerList> grid = new Grid<>(CustomerList.class);
 
     public Example1(GraphService graphService) {
         this.graphService = graphService;
@@ -40,8 +46,21 @@ public class Example1 extends VerticalLayout {
     private void configureGrid() {
         grid.addClassNames("contact-grid");
         grid.setSizeFull();
-        grid.setColumns("firstName");
-//        grid.addColumn(customer -> customer.getFirstName());
+//        grid.setColumns("firstName");
+        grid.setColumns();
+        grid.addColumn(customers -> {
+
+                    Customer customer1 = customers.getCustomer1();
+                    return customer1.getFirstName();
+                },"Customer 1");
+
+        grid.addColumn(customers -> customers.getCustomer2().getFirstName(),"Customer 2");
+        grid.addColumn(customers -> customers.getCustomer3().getFirstName(),"Customer 3");
+
+
+
+
+
         grid.getColumns().forEach(col -> col.setAutoWidth(true));
     }
 
@@ -54,7 +73,8 @@ public class Example1 extends VerticalLayout {
     }
 
     private void updateList() {
-        grid.setItems(this.graphService.getCustomer());
+        grid.setItems(this.graphService.getCustomerTriples());
+
     }
 
 }

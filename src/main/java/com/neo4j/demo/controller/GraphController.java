@@ -1,8 +1,13 @@
 package com.neo4j.demo.controller;
 
 import com.neo4j.demo.model.Customer;
+import com.neo4j.demo.model.CustomerList;
 import com.neo4j.demo.model.MovieEntity;
 import com.neo4j.demo.service.GraphService;
+import org.apache.commons.lang3.tuple.Triple;
+import org.javatuples.Triplet;
+import org.neo4j.driver.Record;
+import org.neo4j.driver.types.Path;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -47,7 +52,20 @@ public class GraphController {
     }
 
     @GetMapping("/triangle")
-    public List<Customer[]> getTriangle() {
-        return graphService.getTriangle();
+    public List<CustomerList> getTriangle() {
+        return graphService.getCustomerTriples();
+    }
+
+    @GetMapping("/paths")
+    public Stream<String> getPaths() {
+        return graphService.getPaths();
+    }
+
+    @GetMapping("/loops")
+    public Stream<String> getLoops() {
+        return graphService.getLoops().map(customerList -> {
+            System.out.println(customerList);
+            return customerList;
+        });
     }
 }

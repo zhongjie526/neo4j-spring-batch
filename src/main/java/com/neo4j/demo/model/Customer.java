@@ -3,17 +3,19 @@ package com.neo4j.demo.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.neo4j.driver.Value;
 import org.springframework.data.neo4j.core.schema.Id;
 import org.springframework.data.neo4j.core.schema.Node;
 import org.springframework.data.neo4j.core.schema.Property;
 import org.springframework.data.neo4j.core.schema.Relationship;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 
 @Node
-public class Customer {
+public class Customer implements Serializable {
 
 	@Id @Getter @Setter private String CIF;
 	@Property @Getter @Setter private int age;
@@ -45,5 +47,12 @@ public class Customer {
 				", firstName='" + firstName + '\'' +
 				", lastName='" + lastName + '\'' +
 				'}';
+	}
+
+	public static Customer valueToCustomer(Value value){
+		Customer customer = new Customer();
+		customer.setFirstName(value.get("firstName").asString());
+		customer.setAge(value.get("age").asInt());
+		return customer;
 	}
 }

@@ -1,6 +1,7 @@
 package com.neo4j.demo.repo;
 
 import com.neo4j.demo.model.Customer;
+import com.neo4j.demo.model.CustomerList;
 import org.neo4j.cypherdsl.core.*;
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.data.neo4j.repository.query.Query;
@@ -43,16 +44,34 @@ public interface CustomerRepo extends Neo4jRepository<Customer, String>, Cypherd
     List<Customer> findCustomersWithNoTransfersOut();
 
     @Query("match (a:Customer)-[]->(b:Customer)-[]->(c:Customer)-[]->(a:Customer)\n" +
-            "return distinct [a,b,c]")
-    List<Customer[]> findCustomerTriangles();
-
+            "return [a,b]")
+    List<Customer[]> findCustomerDoubles();
 
     @Query("match (a:Customer)-[]->(b:Customer)-[]->(c:Customer)-[]->(a:Customer)\n" +
+            "return [a,b,c]")
+    List<Customer[]> findCustomerTriples();
+
+    @Query("match (a)-[:TRANSFER*..2]-(b) where a.firstName='Jack' return distinct b")
+    List<Customer> twoHops();
+
+    @Query("match (a:Customer)-[:TRANSFER]->(b:Customer)-[:TRANSFER]->(c:Customer)-[:TRANSFER]->(a:Customer)\n" +
             "return distinct a")
     List<Customer> findCustomers();
 
     class CustomerTriple{
         Customer customer1;
+    }
+
+    static Statement loopTransfers(){
+        Node a = Cypher.node("Customer").named("a");
+        Node b = Cypher.node("Customer").named("b");
+        Node c = Cypher.node("Customer").named("c");
+
+        Relationship r1 = a.relationshipTo(b, "TRANSFER");
+        Relationship r2 = b.relationshipTo(c, "TRANSFER");
+        Relationship r3 = c.relationshipTo(a, "TRANSFER");
+
+        return Cypher.match(r1).match(r2).match(r3).returning(a, b, c).build();
     }
 
     static Statement whoHasNoTransfers(){
